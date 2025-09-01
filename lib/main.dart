@@ -1,5 +1,6 @@
 import 'json_operations.dart';
 import 'appbar.dart';
+import 'note_preview.dart';
 
 import 'package:flutter/material.dart';
 
@@ -46,47 +47,7 @@ class _AnasaSayfaState extends State<AnasaSayfa> {
       backgroundColor: Color.fromARGB(255, 17, 17, 17),
       appBar: notepadAppbar(loadAndSetNotes),
 
-      body: Column(
-        children: [
-          appbarLine(),
-
-          //...List.generate(notes.length, (i) {
-          //  return Column(
-          //    mainAxisAlignment: MainAxisAlignment.center,
-          //    children: [
-          //      Spacer(),
-          //      Column(
-          //        children: [
-          //          SizedBox(
-          //            height: 100,
-          //            width: 370,
-          //            child: Container(
-          //              decoration: BoxDecoration(color: Colors.grey.shade800),
-          //              child: Center(child: Text("data")),
-          //            ),
-          //          ),
-          //          SizedBox(
-          //            height: 50,
-          //            width: 370,
-          //            child: Container(
-          //              decoration: BoxDecoration(
-          //                color: Color.fromARGB(255, 14, 14, 14),
-          //              ),
-          //              child: Center(
-          //                child: Text(
-          //                  "data",
-          //                  style: TextStyle(color: Colors.grey.shade900),
-          //                ),
-          //              ),
-          //            ),
-          //          ),
-          //        ],
-          //      ),
-          //    ],
-          //  );
-          //}),
-        ],
-      ),
+      body: Column(children: [appbarLine(600), notePreview(), notePreview()]),
       floatingActionButton: AddNoteButton(),
     );
   }

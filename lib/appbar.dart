@@ -26,7 +26,7 @@ AppBar notepadAppbar(VoidCallback onLoadNotes) {
   );
 }
 
-Container appbarLine() {
+Container appbarLine(double width) {
   return Container(
     decoration: BoxDecoration(
       gradient: LinearGradient(
@@ -38,10 +38,11 @@ Container appbarLine() {
           Color.fromARGB(255, 255, 17, 0),
           Colors.transparent,
         ],
-        stops: [0.0, 0.07, 0.10, 0.40, 0.96, 1.0],
+        stops: [0.0, 0.07, 0.13, 0.40, 0.96, 1.0],
       ),
       borderRadius: BorderRadius.circular(2000),
     ),
+    width: width,
     height: 2,
   );
 }
