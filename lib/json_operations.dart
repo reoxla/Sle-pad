@@ -27,6 +27,8 @@ class _AddNoteButtonState extends State<AddNoteButton> {
 
 Future<List<dynamic>> loadNotes() async {
   final String response = await rootBundle.loadString("assets/Notes.json");
-  final data = await jsonDecode(response);
-  return data["items"];
+  final data = await jsonDecode(response) as Map<String, dynamic>;
+  final items = data["items"] as List<dynamic>;
+
+  return items.map((item) => item as Map<String, dynamic>).toList();
 }

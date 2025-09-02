@@ -47,7 +47,11 @@ class _AnasaSayfaState extends State<AnasaSayfa> {
       backgroundColor: Color.fromARGB(255, 17, 17, 17),
       appBar: notepadAppbar(loadAndSetNotes),
 
-      body: Column(children: [appbarLine(600), notePreview(), notePreview()]),
+      body: Column(children: [
+        ...List.generate(notes.length, (i) {
+          return notePreview(notes[i]['title'], notes[i]['context'], notes[i]['last updated date']);
+        })
+      ],),
       floatingActionButton: AddNoteButton(),
     );
   }
