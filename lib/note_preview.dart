@@ -2,7 +2,7 @@ import 'appbar.dart';
 
 import 'package:flutter/material.dart';
 
-Container _notePreviewTop(String context) {
+Container _notePreviewTop(String? context) {
   return Container(
     width: 550,
     height: 100,
@@ -16,7 +16,7 @@ Container _notePreviewTop(String context) {
       ),
     ),
     child: Text(
-      context.substring(0, 40),
+      context ?? '',
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         color: Colors.grey.shade800,
@@ -55,24 +55,28 @@ Container _notePreviewBottom(String title, String date) {
             fontWeight: FontWeight.bold,
           ),
         ),
-        Text(
-          date,
-          style: TextStyle(color: Colors.grey.shade800, fontSize: 13),
-        ),
+        Text(date, style: TextStyle(color: Colors.grey.shade800, fontSize: 13)),
       ],
     ),
   );
 }
 
-Row notePreview(String title, String context, String lastUpdatedDate) {
+Row notePreview({
+  required String title,
+  String? context,
+  required String lastUpdatedDate,
+}) {
   return Row(
     children: [
       Spacer(flex: 1),
       Expanded(
         flex: 30,
         child: Column(
-          children: [_notePreviewTop(context), appbarLine(560), _notePreviewBottom(title, lastUpdatedDate)],
-          
+          children: [
+            _notePreviewTop(context),
+            appbarLine(560),
+            _notePreviewBottom(title, lastUpdatedDate),
+          ],
         ),
       ),
       Spacer(flex: 1),

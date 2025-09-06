@@ -1,10 +1,12 @@
-import 'json_operations.dart';
 import 'appbar.dart';
 import 'note_preview.dart';
+import 'add_note_button.dart';
+import 'database_helper.dart';
 
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -31,14 +33,21 @@ class AnasaSayfa extends StatefulWidget {
 }
 
 class _AnasaSayfaState extends State<AnasaSayfa> {
-  List notes = [];
+  List<Map<String, dynamic>> notes = [];
 
   Future<void> loadAndSetNotes() async {
-    final loadedNotes = await loadNotes(); // this returns the list
+    var fetched = await Note.getNotes();
     setState(() {
-      notes = loadedNotes;
+      notes = fetched; // ✅ ensure correct type
       print(notes);
     });
+  }
+
+  @override
+  void initState() {
+    loadAndSetNotes();
+    Note.initDatabase();
+    super.initState();
   }
 
   @override
@@ -47,11 +56,19 @@ class _AnasaSayfaState extends State<AnasaSayfa> {
       backgroundColor: Color.fromARGB(255, 17, 17, 17),
       appBar: notepadAppbar(loadAndSetNotes),
 
-      body: Column(children: [
-        ...List.generate(notes.length, (i) {
-          return notePreview(notes[i]['title'], notes[i]['context'], notes[i]['last updated date']);
-        })
-      ],),
+      body: Column(
+        children: [
+          appbarLine(420),
+          ...List.generate(notes.length, (i) {
+            return notePreview(
+              title: notes[i]['title'],
+              context: notes[i]['context'],
+              lastUpdatedDate: notes[i]['lastUpdatedDate'],
+            );
+          }),
+          Text(notes.length.toString()),
+        ],
+      ),
       floatingActionButton: AddNoteButton(),
     );
   }
