@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
+Color red = Color.fromARGB(255, 255, 17, 0);
+
 AppBar notepadAppbar(VoidCallback onLoadNotes) {
   return AppBar(
     leading: IconButton(
       onPressed: () {},
-      icon: Icon(
-        Icons.table_rows,
-        color: const Color.fromARGB(255, 255, 17, 0),
-      ),
+      icon: Icon(Icons.table_rows, color: red),
     ),
     backgroundColor: Colors.black,
     toolbarHeight: 45,
@@ -17,27 +16,20 @@ AppBar notepadAppbar(VoidCallback onLoadNotes) {
           onLoadNotes();
           print('object');
         },
-        icon: Icon(
-          Icons.more_horiz_outlined,
-          color: const Color.fromARGB(255, 255, 17, 0),
-        ),
+        icon: Icon(Icons.more_horiz_outlined, color: red),
       ),
     ],
   );
 }
 
 Container appbarLine(double width) {
+  Color white = Colors.white;
+  Color transparent = Colors.transparent;
+
   return Container(
     decoration: BoxDecoration(
       gradient: LinearGradient(
-        colors: [
-          Colors.transparent,
-          Color.fromARGB(255, 255, 255, 255),
-          Color.fromARGB(255, 255, 255, 255),
-          Color.fromARGB(255, 255, 17, 0),
-          Color.fromARGB(255, 255, 17, 0),
-          Colors.transparent,
-        ],
+        colors: [transparent, white, white, red, red, transparent],
         stops: [0.0, 0.07, 0.13, 0.40, 0.96, 1.0],
       ),
       borderRadius: BorderRadius.circular(2000),

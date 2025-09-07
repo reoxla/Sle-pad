@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notepad/appbar.dart';
 
 import 'database_helper.dart';
 
@@ -24,10 +25,17 @@ class _AddNoteButtonState extends State<AddNoteButton> {
   String? title;
 
   void _addNoteDialog() {
-    var height = MediaQuery.of(context).size.height * 0.15;
-    var widht = MediaQuery.of(context).size.width * 0.9;
-    var bgColor = Color.fromARGB(255, 17, 17, 17);
-    var textStyle = TextStyle(color: Colors.white, fontWeight: FontWeight.bold);
+    double height = MediaQuery.of(context).size.height * 0.15;
+    double widht = MediaQuery.of(context).size.width * 0.9;
+
+    TextStyle textStyle = TextStyle(
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+    );
+
+    Color bgColor = Color.fromARGB(255, 17, 17, 17);
+    Color red = Color.fromARGB(255, 255, 17, 0);
+    Color darkRed = Color.fromARGB(255, 156, 16, 0);
 
     showDialog(
       context: context,
@@ -41,8 +49,8 @@ class _AddNoteButtonState extends State<AddNoteButton> {
               decoration: InputDecoration(
                 hintText: "Title",
                 fillColor: Colors.white,
-                enabledBorder: _inputBorder(Color.fromARGB(255, 156, 16, 0)),
-                focusedBorder: _inputBorder(Color.fromARGB(255, 255, 17, 0)),
+                enabledBorder: _inputBorder(darkRed),
+                focusedBorder: _inputBorder(red),
               ),
               onChanged: (value) {
                 title = value;
@@ -62,13 +70,10 @@ class _AddNoteButtonState extends State<AddNoteButton> {
               },
               style: ButtonStyle(
                 overlayColor: _stateProperty(
-                  Color.fromARGB(150, 156, 16, 0),
-                  Color.fromARGB(150, 255, 17, 0),
+                  darkRed.withAlpha(150),
+                  red.withAlpha(150),
                 ),
-                foregroundColor: _stateProperty(
-                  Color.fromARGB(255, 156, 16, 0),
-                  Color.fromARGB(255, 255, 17, 0),
-                ),
+                foregroundColor: _stateProperty(darkRed, red),
               ),
               child: Text("Create"),
             ),
@@ -86,7 +91,7 @@ class _AddNoteButtonState extends State<AddNoteButton> {
           _addNoteDialog();
         });
       },
-      backgroundColor: const Color.fromARGB(255, 255, 17, 0),
+      backgroundColor: red,
       splashColor: Colors.transparent,
       enableFeedback: false,
       elevation: 2,

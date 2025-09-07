@@ -45,13 +45,18 @@ class _AnasaSayfaState extends State<AnasaSayfa> {
 
   @override
   void initState() {
-    loadAndSetNotes();
     Note.initDatabase();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (notes.isEmpty) {
+      setState(() {
+        loadAndSetNotes();
+      });
+    }
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 17, 17, 17),
       appBar: notepadAppbar(loadAndSetNotes),
