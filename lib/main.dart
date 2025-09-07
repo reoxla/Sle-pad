@@ -61,20 +61,23 @@ class _AnasaSayfaState extends State<AnasaSayfa> {
       backgroundColor: Color.fromARGB(255, 17, 17, 17),
       appBar: notepadAppbar(loadAndSetNotes),
 
-      body: Column(
-        children: [
-          appbarLine(420),
-          ...List.generate(notes.length, (i) {
-            return notePreview(
-              title: notes[i]['title'],
-              context: notes[i]['context'],
-              lastUpdatedDate: notes[i]['lastUpdatedDate'],
-            );
-          }),
-          Text(notes.length.toString()),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ...List.generate(notes.length, (i) {
+              return notePreview(
+                id: notes[i]['id'],
+                title: notes[i]['title'],
+                context: notes[i]['context'],
+                lastUpdatedDate: notes[i]['lastUpdatedDate'],
+                setstate: loadAndSetNotes,
+              );
+            }),
+            Text(notes.length.toString()),
+          ],
+        ),
       ),
-      floatingActionButton: AddNoteButton(),
+      floatingActionButton: addNoteButton(context, loadAndSetNotes),
     );
   }
 }

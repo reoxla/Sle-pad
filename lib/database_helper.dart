@@ -54,4 +54,11 @@ abstract class Note {
       print("Error $e");
     }
   }
+
+  static void deleteNote(int id) async {
+    if (database == null) {
+      return;
+    }
+    await database!.delete("notes", where: 'id = $id');
+  }
 }

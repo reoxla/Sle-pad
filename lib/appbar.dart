@@ -19,6 +19,10 @@ AppBar notepadAppbar(VoidCallback onLoadNotes) {
         icon: Icon(Icons.more_horiz_outlined, color: red),
       ),
     ],
+    bottom: PreferredSize(
+      preferredSize: Size.fromHeight(2),
+      child: SizedBox(height: 2, width: 560, child: appbarLine(560)),
+    ),
   );
 }
 
