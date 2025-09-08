@@ -5,12 +5,19 @@ import 'package:flutter/material.dart';
 
 Color grey = Colors.grey.shade800;
 
-Container _notePreviewTop(String? context) {
+Container _notePreviewTop(String? content, BuildContext context) {
+  double width = MediaQuery.of(context).size.width;
+  double height = MediaQuery.of(context).size.height;
+
   return Container(
-    width: 550,
-    height: 100,
-    margin: EdgeInsets.only(top: 13),
-    padding: EdgeInsets.only(left: 15, top: 40, right: 15),
+    width: width * 0.95,
+    height: height * 0.133,
+    margin: EdgeInsets.only(top: width * 0.05),
+    padding: EdgeInsets.only(
+      left: width * 0.035,
+      top: width * 0.09,
+      right: width * 0.035,
+    ),
     decoration: BoxDecoration(
       color: Colors.black,
       borderRadius: BorderRadius.only(
@@ -19,7 +26,7 @@ Container _notePreviewTop(String? context) {
       ),
     ),
     child: Text(
-      context ?? '',
+      content ?? '',
       overflow: TextOverflow.ellipsis,
       style: TextStyle(color: grey, fontSize: 30, fontWeight: FontWeight.bold),
       textAlign: TextAlign.left,
@@ -27,17 +34,24 @@ Container _notePreviewTop(String? context) {
   );
 }
 
-Stack _notePreviewBottom(String title, String date, int id, Function setstate) {
+Stack _notePreviewBottom(
+  String title,
+  String date,
+  int id,
+  Function setstate,
+  BuildContext context,
+) {
   Radius radius = Radius.circular(25);
+  double width = MediaQuery.of(context).size.width;
 
   return Stack(
     children: [
       Container(
         alignment: Alignment.centerLeft,
-        width: 550,
-        height: 60,
-        margin: EdgeInsets.only(bottom: 3),
-        padding: EdgeInsets.only(left: 20, top: 5),
+        width: width * 0.95,
+        height: width * 0.175,
+        margin: EdgeInsets.only(bottom: width * 0.003),
+        padding: EdgeInsets.only(left: width * 0.045, top: width * 0.013),
         decoration: BoxDecoration(
           color: Colors.grey.shade900,
           borderRadius: BorderRadius.only(
@@ -48,7 +62,7 @@ Stack _notePreviewBottom(String title, String date, int id, Function setstate) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(width: 550),
+            SizedBox(width: width * 0.95),
             Text(
               title,
               overflow: TextOverflow.ellipsis,
@@ -66,7 +80,7 @@ Stack _notePreviewBottom(String title, String date, int id, Function setstate) {
         ),
       ),
       Container(
-        margin: EdgeInsets.only(left: 320),
+        margin: EdgeInsets.only(left: width * 0.82),
         child: previewOptions(id, setstate),
       ),
     ],
@@ -76,9 +90,10 @@ Stack _notePreviewBottom(String title, String date, int id, Function setstate) {
 Row notePreview({
   required int id,
   required String title,
-  String? context,
+  String? content,
   required String lastUpdatedDate,
   required Function setstate,
+  required BuildContext context,
 }) {
   return Row(
     children: [
@@ -87,9 +102,9 @@ Row notePreview({
         flex: 30,
         child: Column(
           children: [
-            _notePreviewTop(context),
-            appbarLine(560),
-            _notePreviewBottom(title, lastUpdatedDate, id, setstate),
+            _notePreviewTop(content, context),
+            appbarLine(context),
+            _notePreviewBottom(title, lastUpdatedDate, id, setstate, context),
           ],
         ),
       ),

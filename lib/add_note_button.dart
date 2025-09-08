@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:notepad/appbar.dart';
-import 'package:path/path.dart';
 
 import 'database_helper.dart';
 

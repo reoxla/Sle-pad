@@ -59,7 +59,7 @@ class _AnasaSayfaState extends State<AnasaSayfa> {
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 17, 17, 17),
-      appBar: notepadAppbar(loadAndSetNotes),
+      appBar: notepadAppbar(loadAndSetNotes, context),
 
       body: SingleChildScrollView(
         child: Column(
@@ -68,9 +68,10 @@ class _AnasaSayfaState extends State<AnasaSayfa> {
               return notePreview(
                 id: notes[i]['id'],
                 title: notes[i]['title'],
-                context: notes[i]['context'],
+                content: notes[i]['context'],
                 lastUpdatedDate: notes[i]['lastUpdatedDate'],
                 setstate: loadAndSetNotes,
+                context: context,
               );
             }),
             Text(notes.length.toString()),

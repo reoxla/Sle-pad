@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Color red = Color.fromARGB(255, 255, 17, 0);
 
-AppBar notepadAppbar(VoidCallback onLoadNotes) {
+AppBar notepadAppbar(VoidCallback onLoadNotes, BuildContext context) {
   return AppBar(
     leading: IconButton(
       onPressed: () {},
@@ -21,14 +21,15 @@ AppBar notepadAppbar(VoidCallback onLoadNotes) {
     ],
     bottom: PreferredSize(
       preferredSize: Size.fromHeight(2),
-      child: SizedBox(height: 2, width: 560, child: appbarLine(560)),
+      child: SizedBox(height: 2, width: 560, child: appbarLine(context)),
     ),
   );
 }
 
-Container appbarLine(double width) {
+Container appbarLine(BuildContext context) {
   Color white = Colors.white;
   Color transparent = Colors.transparent;
+  double width = MediaQuery.of(context).size.width;
 
   return Container(
     decoration: BoxDecoration(
@@ -38,7 +39,7 @@ Container appbarLine(double width) {
       ),
       borderRadius: BorderRadius.circular(2000),
     ),
-    width: width,
+    width: width * 0.98,
     height: 2,
   );
 }
